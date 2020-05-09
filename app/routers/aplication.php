@@ -1,4 +1,4 @@
 <?php 
 $app = 'intanet';
-$protocolo='https:';
+$protocolo='https://';
 ?>
