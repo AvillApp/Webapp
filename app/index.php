@@ -1,7 +1,7 @@
 <?php
 include('config.php');
 include('./routers/rutas.php');
-echo $vistas;
+//echo $vistas;
 
     if(isset($_SESSION['usuario'])){
         ?>
