@@ -3,7 +3,7 @@ include('aplication.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 //$base = "http://" . $host . $uri . "/";
-$base = "http://" . $host . "/". $app. "/";
+$base = $protocolo . $host . "/". $app. "/";
 
 $ruta_css= $base.'app/libreria/css/';
 $ruta_js = $base.'app/libreria/';
