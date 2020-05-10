@@ -7,8 +7,7 @@ function cerrar_sesion (){
 }
 
 function add_session($id){
-    @session_start();
-    include('../libreria/dependencia/conexion.php');
+    @include('../config.php');
 
     $sql = "select id, nombre, apellidos from users where telefono='".$id."' ";
     $query =pg_query($conexion, $sql);
