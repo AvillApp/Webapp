@@ -1,5 +1,7 @@
 <?php
 include('../../routers/rutas.php'); // Rutas
+if(!isset($_SESSION['id'])){
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +34,7 @@ include('../../routers/rutas.php'); // Rutas
                     <div class="form-group">
                       <input type="number" class="form-control form-control-user" id="telefono"  placeholder="Introduce número de teléfono">
                     </div>
-                    <a href="#" id='ingresar' class="btn btn-success btn-user btn-block">
+                    <a href="javascript:;" id='ingresar' class="btn btn-success btn-user btn-block">
                       Ingresar
                     </a>   
                   </form>
@@ -57,3 +59,31 @@ include('../../routers/rutas.php'); // Rutas
 </body>
 
 </html>
+<script>
+  $("#ingresar").click(function(){
+      var telefono = $("#telefono").val();
+      var datos = 'users=1&login=1&telefono='+telefono;
+        $.ajax({
+          type: "POST",
+          data: datos,
+          dataType: "JSON",
+          url: "<?php echo $controller ?>UserController.php",
+          success: function (valor){
+            if(valor.estado=='exito')
+              parent.location='<?php echo $vistas ?>perfil';
+            else
+              alert("Usuario no identificado, por favor, contacte con el administrador")
+          }
+        })
+  })
+
+</script>
+<?php 
+}else{
+  ?> 
+  <script>
+     parent.location='<?php echo $vistas ?>perfil';
+  </script>
+  <?php
+}
+?>

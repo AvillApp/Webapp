@@ -1,12 +1,13 @@
 <?php
 
-include('./SessionModel.php'); // session
+include('../modelo/SessionModel.php'); // session
 
-function validate_user($telefono){
+function validate($telefono){
+    @include('../config.php');
 
- $sql = "select * from users where telefono='".$telefono."' ";
+ $sql = "select id from users where telefono='".$telefono."' ";
  $query = pg_query($conexion, $sql);
- $rows = pg_num_rows($sql);
+ $rows = pg_num_rows($query);
     if($rows)
         return "1";
     else
@@ -14,65 +15,142 @@ function validate_user($telefono){
 
 }
 
-function save_user($nombre, $telefono){
-    $validate = validate_user($telefono);
+function save($nombre, $apellidos, $telefono, $tipouser){
+    @include('../config.php');
+    $validate = validate($telefono);
     if($validate == 2){
-        $insert = "insert into users (nombre, telefono, tipouser, fecha_registro)
-         values('".$nombre."', '".$telefono."', '".$tipouser."', '".$fecha_registro."') ";
+        $insert = "insert into users (nombre, apellidos, telefono, tipouser, fecha_registro, estado)
+         values('".$nombre."', '".$apellidos."', '".$telefono."', '".$tipouser."', '".$fecha_registro."', 1) ";
         $query = pg_query($conexion, $insert);
-            if($query)
-                return "1";
-            else
-                return "2";
+        
+            if($query){
+                $datos2 = array(
+                    'estado' => 'exito',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }
+            else{
+                $datos2 = array(
+                    'estado' => 'error',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }
+    }else{
+        
+        $datos2 = array(
+            'estado' => 'Usuario ya existe',                   
+        );               
+        header('Content-Type: application/json');
+        return json_encode($datos2, JSON_FORCE_OBJECT);
+       
     }
 }
 
-function update_user($id, $nombre, $apellidos, $telefono, $email, $id_usuario, $tipouser, $estado){
-    $validate = validate_user($telefono);
+function update($id, $nombre, $apellidos, $telefono, $email, $id_usuario, $tipouser, $estado){
+    @include('../config.php');
+    $validate = validate($telefono);
 
     if ($validate == 1){
 
-        $update = "update users nombre='".$nombre."', telefono='".$telefono."', email='".$email."',
-         telefono='".$telefono."', id_usuario='".$id_usuario."', tipouser='".$tipouser."' ";
-        $query = pg_query($conexion, $update);
-            if($query)
-                return "1";
-            else
-                return "2";
+        $update = "update users set nombre='".$nombre."', email='".$email."',
+         id_usuario='".$id_usuario."', tipouser='".$tipouser."' where id='".$id."' ";
+        @$query = pg_query($conexion, $update);
+            if($query){
+                $datos2 = array(
+                    'estado' => 'exito',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }
+            else{
+                $datos2 = array(
+                    'estado' => 'Teléfono ya existe',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT); 
+            }
     }else{
-        return "3";
+        $datos2 = array(
+            'estado' => 'Usuario no existe',                   
+        );               
+        header('Content-Type: application/json');
+        return json_encode($datos2, JSON_FORCE_OBJECT);
+       // return "3";
     }
 
 }
 
-function elim_user($id, $telefono){
-
-    $validate = validate_user($telefono);
+function elim($id, $telefono){
+    @include('../config.php');
+    $validate = validate($telefono);
 
     if ($validate == 1){
 
-        $update = "update users estado = 2 where id='".$id."' ";
-        $query = pg_query($conexion, $update);
-            if($query)
-                return "1";
-            else
-                return "2";
+         $update = "update users set estado = 2 where id='".$id."' and telefono='".$telefono."' ";
+         $query = pg_query($conexion, $update);
+         $rows = pg_affected_rows($query);
+            if($rows>0){
+                $datos2 = array(
+                    'estado' => 'exito',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }
+            else{
+                $datos2 = array(
+                    'estado' => 'Token incorrecto',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }
     }else{
-        return "3";
+        $datos2 = array(
+            'estado' => 'Usuario no existe',                   
+        );               
+        header('Content-Type: application/json');
+        return json_encode($datos2, JSON_FORCE_OBJECT);
     }
 }
 
-function login_user($telefono){
-
-    $validate = validate_user($telefono);
-    if ($validate == 1)
-        return "1";
-    else
-        return "2";
+function login($telefono){
+    $validate = validate($telefono);
+    if ($validate == 1){
+        $add_sesion=add_session($telefono);
+            if($add_sesion==1){
+                $datos2 = array(
+                    'estado' => 'exito',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }else{
+                $datos2 = array(
+                    'estado' => 'error',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }       
+    }       
+    else{
+        $datos2 = array(
+            'estado' => 'No autorizado',                   
+        );               
+        header('Content-Type: application/json');
+        return json_encode($datos2, JSON_FORCE_OBJECT);
+    }
 }
 
-function logout_user($id){
-    $cerrar_sesion = cerrar_sesion ($id);
+function logout(){
+    $cerrar_sesion = cerrar_sesion ();
+    if($cerrar_sesion==1){
+        $datos2 = array(
+            'estado' => 'exito',                   
+        );               
+        header('Content-Type: application/json');
+        return json_encode($datos2, JSON_FORCE_OBJECT);
+    }
+
 }
 
 ?>

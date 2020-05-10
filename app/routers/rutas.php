@@ -1,4 +1,5 @@
 <?php 
+@session_start();
 include('aplication.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -10,6 +11,8 @@ $ruta_js = $base.'app/libreria/';
 $ruta_plug = $base.'app/libreria/plug/';
 $vistas = $base.'app/view/';
 $modelo = $base.'app/modelo/';
+$controller = $base.'app/controller/';
+
 // Conexión db
 //$config = $base.'libreria/dependencia/Connections/conectar_bd.php';
 $config = $base.'app/config.php';
