@@ -54,6 +54,9 @@ if(isset($_GET['pedido_user'])){ //  Desde el móvil
      if(isset($_GET['getLog'])){
         echo getlogs_pedidos($_GET['id']);
      }
+     if(isset($_GET['idPedido'])){
+        echo idPedido ($_POST['id'], $_POST['direccion']);
+     }
      
  }
 
