@@ -23,7 +23,7 @@ if(isset($_POST['pedido'])){ //
     }
 
     if(isset($_POST['select_conduc'])){
-        echo  select_conduct($_POST['id'], $_POST['conductor'], $_POST['estado'], $_POST['created_by']);
+        echo  select_conduct($_POST['id'], $_POST['conductor'], $_POST['estado'], $_POST['created_by'], $_POST['tiempo'], $_POST['precio']);
     } 
 
     if(isset($_POST['delete'])){

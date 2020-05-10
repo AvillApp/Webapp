@@ -9,9 +9,22 @@ function cerrar_sesion (){
 function add_session($id){
     @session_start();
     include('../libreria/dependencia/conexion.php');
-    $_SESSION['id'] = $id;
 
-    return "1";
+    $sql = "select id, nombre, apellidos from users where telefono='".$id."' ";
+    $query =pg_query($conexion, $sql);
+    $rows = pg_num_rows($query);
+        if($rows){
+            $datos = pg_fetch_assoc($query);
+            $_SESSION['id'] = $id;
+            $_SESSION['id_user'] = $datos['id'];
+            $_SESSION['nombre'] = $datos['nombre']." ".$datos['apellidos'];
+            return "1";
+        }else{
+            return "2";
+        }
+    
+
+   
 
     /*$sql = "insert into sesion (id_user, id_device, fecha_inicio, fecha_registro) 
     values('".$id_user."', '".$id_device."', '".$fecha_inicio."', '".$fecha_registro."') ";

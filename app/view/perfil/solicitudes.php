@@ -1,8 +1,8 @@
 <?php
 @include('../../config.php');
 
-$sql2 = "select pedidos.telealt, pedidos.id_user, pedidos.indicacion, pedidos.direccion, users.nombre, pedidos.fecha_registro
- from pedidos, users where users.id=pedidos.id_user and pedidos.estado=1 order by fecha_registro";
+$sql2 = "select pedidos.id, estado.id as idestado, pedidos.telealt, pedidos.id_user, pedidos.indicacion, pedidos.direccion, users.nombre, pedidos.fecha_registro, estado.descripcion as estado
+ from pedidos, users,estado where estado.id=pedidos.estado and users.id=pedidos.id_user and pedidos.estado!=6 order by fecha_registro";
 $query2 = pg_query($conexion, $sql2);
 $rows2 = pg_num_rows($query2);
 
@@ -49,14 +49,43 @@ $rows2 = pg_num_rows($query2);
                           <td><?php echo $datos2['telealt'] ?></td>
                           <td><?php echo $datos2['nombre'] ?> </td>
                           <td><?php echo $datos2['fecha_registro'] ?></td>
-                          <td><?php echo $datos2['nombre'] ?> </td>                         
+                          <td><?php
+                          
+                          if($datos2['idestado'] == 5) // En camino
+                          $colore = "green";
+                          else if($datos2['idestado'] == 3) // En espera
+                          $colore = "red";
+                          else
+                          $colore = "black";
+
+                          echo "<font color='$colore'>".$datos2['estado']."</font>"; ?> </td>                         
                           <td><button class='btn btn-success' id='aceptar<?php echo $i ?>'>Aceptar</button> </td>
                           <td><button class='btn btn-primary'>Conductor</button> </td>
                           <td><button class='btn btn-danger'>Rechazar</button></td>
                         </tr>
                         <script>
                               $("#aceptar<?php echo $i ?>").click(function(){
-                                  alert("Bien<?php echo $i ?>")
+                                 // alert("Bien<?php echo $i ?>")
+                                  $("#solicitudModal").modal();
+                                  $("#contenido").empty();
+                                  $("#contenido").load('aceptar.php?id_pedido=<?php echo $datos2['id'] ?>');
+                                  $("#contenido").show();
+                              });
+
+                              $("#conductor<?php echo $i ?>").click(function(){
+                                //  alert("Bien<?php echo $i ?>")
+                                  $("#solicitudModal").modal();
+                                  $("#contenido").empty();
+                                  $("#contenido").load('select_conductor.php');
+                                  $("#contenido").show();
+                              });
+
+                              $("#rechazar<?php echo $i ?>").click(function(){
+                                  //alert("Bien<?php echo $i ?>")
+                                  $("#solicitudModal").modal();
+                                  $("#contenido").empty();
+                                  $("#contenido").load('rechazar.php');
+                                  $("#contenido").show();
                               });
                             </script>
                         <?php
@@ -71,6 +100,14 @@ $rows2 = pg_num_rows($query2);
 
           </div>
           
+
+   <div class="modal fade" id="solicitudModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" id='contenido'>
+       
+      </div>
+    </div>
+  </div>
 
 <script>
 $(document).ready(function() {

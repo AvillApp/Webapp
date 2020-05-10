@@ -13,6 +13,41 @@ function validate($id, $direccion){  // Validar pedido del usuario
         return "2";
 
 }
+  
+function idPedido ($id, $direccion){ // Id PEDIDO
+    @include('../config.php');
+
+    $sql = "select id from pedidos where id_user='".$id."' and direccion='".trim(strtoupper($direccion))."' and estado = 1";
+    $query = pg_query($conexion, $sql);
+    $rows = pg_num_rows($query);
+       if($rows){
+           $datos =pg_fetch_assoc($query);
+           return $datos['id'];
+       }
+       else
+           return "error";
+}
+
+function logs_pedidos($id, $descripcion, $hora, $fecha, $created_by){
+    @include('../config.php');
+
+    $sql="insert into logs_pedidos (id_pedido, descripcion, hora, fecha, created_by)
+    values('".$id."', '".$descripcion."', '".$hora."', '".$fecha."', '".$created_by."') ";
+    $query = pg_query($conexion, $sql);
+        if($query){
+            $datos2 = array(
+                'estado' => 'exito',                   
+            );               
+            header('Content-Type: application/json');
+            return json_encode($datos2, JSON_FORCE_OBJECT);
+        }else{
+            $datos2 = array(
+                'estado' => 'error',                   
+            );               
+            header('Content-Type: application/json');
+            return json_encode($datos2, JSON_FORCE_OBJECT);
+        }
+}
 
 function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $telealt, $register_by){
 
@@ -26,6 +61,12 @@ function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $tel
         $query = pg_query($conexion,$insert);
 
             if($query){
+                // Registamos el evento del pedido del usuario
+                $info =  idPedido ($id, $direccion);
+                    if($info!='error'){
+                        logs_pedidos($info , 'Solicitud de Rappi Segura', $hora, $fecha, $register_by);
+                    }
+
                 $datos2 = array(
                     'estado' => 'exito',                   
                 );               
@@ -48,8 +89,42 @@ function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $tel
     }
 
 }
+function update_estad_pd($id, $estado){
+    @include('../config.php');
 
-function select_conduct($id, $conductor, $estado, $created_by){
+    $update = "update pedidos set estado='".$estado."', fecha_update='".$fecha_registro."' where id='".$id."' ";
+    $query = pg_query($conexion, $update);
+    $rows = pg_num_rows($query);
+        if($rows){
+            return "1";
+        }
+        else    
+            return "error";
+}
+
+function update_estad_cond($id, $estado){
+    @include('../config.php');
+    $update = "update users set estado='".$estado."' where id='".$id."' ";
+    $query = pg_query($conexion, $update);
+    $rows = pg_num_rows($query);
+
+        if($rows){
+             $datos2 = array(
+                    'estado' => 'exito',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+        }
+        else{    
+            $datos2 = array(
+                'estado' => 'error',                   
+            );               
+            header('Content-Type: application/json');
+            return json_encode($datos2, JSON_FORCE_OBJECT);
+        }
+}
+
+function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio){
     @include('../config.php');
     
     $sql = "select id from pedidos_condu where id_pedido='".$id."' ";
@@ -66,6 +141,14 @@ function select_conduct($id, $conductor, $estado, $created_by){
         $query2 = pg_query($sql2);
         //$rows = pg_affected_rows($query2);
             if($query2){
+
+                $mensaje = "Encontramos un conductor, confirmar precio: $".number_format($precio);
+
+                logs_pedidos($id , $mensaje, $hora, $fecha, $created_by); // Registramos los logs del pedido
+                update_estad_pd($id, $estado); // Cambiamos estado del pedido
+                update_estad_cond($conductor, $estado); // Cambiamos estado del conductor
+
+
                 $datos2 = array(
                     'estado' => 'exito',                   
                 );               
@@ -80,4 +163,6 @@ function select_conduct($id, $conductor, $estado, $created_by){
             }
 
 }
+
+
 ?>
