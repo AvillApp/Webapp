@@ -55,6 +55,9 @@ function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $tel
     $validate = validate($id, $direccion);
     if($validate==2){
 
+        if($telealt=='')
+        $telealt=0;
+        
         $insert = "insert into pedidos (id_user, direccion, indicacion, longitude, latitude, estado, 
         telealt, register_by, fecha_registro) values('".$id."', '".strtoupper($direccion)."', '".$indicacion."', 
         '".$longitude."', '".$latitude."', '".$estado."', '".$telealt."', '".$register_by."', '".$fecha_registro."') ";
