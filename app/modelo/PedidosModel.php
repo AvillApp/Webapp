@@ -164,5 +164,9 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio)
 
 }
 
+function getlogs_pedidos($id){
+    
+}
+
 
 ?>
