@@ -32,7 +32,7 @@ if(isset($_POST['users'])){ // Modelo de usuarios
     
 }
 
-if(isset($_GET['users'])){ // Modelo de usuarios
+if(isset($_GET['users'])){ // Modelo de usuarios  móviles
     // echo "Entró aquí";
  
      if(isset($_GET['login'])){ // Autenticación de usuario
@@ -42,6 +42,10 @@ if(isset($_GET['users'])){ // Modelo de usuarios
      
      if(isset($_GET['logout'])){      
         echo logout();
+     }
+
+     if (isset($_GET['infoUser'])){
+        echo infoUser($_GET['telefono']);
      }
  
      if(isset($_GET['save'])){ // Guardar usuario

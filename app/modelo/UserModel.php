@@ -134,7 +134,7 @@ function login($telefono){
     }       
     else{
         $datos2 = array(
-            'estado' => 'No autorizado',                   
+            'estado' => 'No',                   
         );               
         header('Content-Type: application/json');
         return json_encode($datos2, JSON_FORCE_OBJECT);
@@ -146,6 +146,39 @@ function logout(){
     if($cerrar_sesion==1){
         $datos2 = array(
             'estado' => 'exito',                   
+        );               
+        header('Content-Type: application/json');
+        return json_encode($datos2, JSON_FORCE_OBJECT);
+    }
+}
+
+function infoUser($telefono){
+    @include('../config.php');
+    $validate = validate($telefono);
+    if($validate==1){
+        $sql = "select id, nombre, apellidos from users where telefono='".$telefono."' ";
+        $query = pg_query($conexion, $sql);
+        $rows = pg_num_rows($query);
+            if($rows){
+                $datos = pg_fetch_assoc($query);
+                $datos2 = array(
+                    'estado' => 'exito',  
+                    'id' => $datos['id'],  
+                    'nombre' => $datos['nombre'],  
+                    'apellidos' => $datos['apellidos'],                 
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }else{
+                $datos2 = array(
+                    'estado' => 'error',                   
+                );               
+                header('Content-Type: application/json');
+                return json_encode($datos2, JSON_FORCE_OBJECT);
+            }
+    }else{
+        $datos2 = array(
+            'estado' => 'error',                   
         );               
         header('Content-Type: application/json');
         return json_encode($datos2, JSON_FORCE_OBJECT);
