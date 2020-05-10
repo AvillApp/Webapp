@@ -32,4 +32,33 @@ if(isset($_POST['users'])){ // Modelo de usuarios
     
 }
 
+if(isset($_GET['users'])){ // Modelo de usuarios
+    // echo "Entró aquí";
+ 
+     if(isset($_GET['login'])){ // Autenticación de usuario
+       // echo "Entró aquí";
+         echo login($_GET['telefono']);
+     }
+     
+     if(isset($_GET['logout'])){      
+        echo logout();
+     }
+ 
+     if(isset($_GET['save'])){ // Guardar usuario
+ 
+         echo save($_GET['nombre'], $_GET['apellidos'], $_GET['telefono'], $_GET['tipouser']);
+     }
+ 
+     if(isset($_GET['update'])){
+ 
+        echo  update($_GET['id'], $_GET['nombre'], $_GET['apellidos'], $_GET['telefono'], $_GET['email'], $_GET['id_usuario'], 
+        $_GET['tipouser'], $_GET['estado']);
+     }
+ 
+     if(isset($_GET['delete'])){
+         echo elim($_GET['id'], $_GET['telefono']);
+     }
+     
+ }
+
 ?>

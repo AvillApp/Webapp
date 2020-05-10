@@ -7,8 +7,8 @@ $dbname="d4ppp5t71v3odv";
 $port=5432;
 $conexion = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$pass");
 
-if($conexion)
+/*if($conexion)
 echo "<br>conectado";
 else
-echo "<br>No conectado";
+echo "<br>No conectado";*/
 ?>

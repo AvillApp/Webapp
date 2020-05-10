@@ -1,8 +1,7 @@
 <?php 
 @session_start();
 include('aplication.php');
-$host  = $_SERVER['HTTP_HOST'];
-$uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+
 //$base = "http://" . $host . $uri . "/";
 $base = $protocolo . $host . "/". $app. "/";
 
