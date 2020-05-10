@@ -28,11 +28,11 @@ function idPedido ($id, $direccion){ // Id PEDIDO
            return "error";
 }
 
-function logs_pedidos($id, $descripcion, $hora, $fecha, $created_by){
+function logs_pedidos($id, $titulo, $descripcion, $hora, $fecha, $created_by){
     @include('../config.php');
 
-    $sql="insert into logs_pedidos (id_pedido, descripcion, hora, fecha, created_by)
-    values('".$id."', '".$descripcion."', '".$hora."', '".$fecha."', '".$created_by."') ";
+    $sql="insert into logs_pedidos (id_pedido, description, time, fecha, created_by, title)
+    values('".$id."', '".$descripcion."', '".$hora."', '".$fecha."', '".$created_by."', '".$titulo."') ";
     $query = pg_query($conexion, $sql);
         if($query){
             $datos2 = array(
@@ -67,7 +67,8 @@ function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $tel
                 // Registamos el evento del pedido del usuario
                 $info =  idPedido ($id, $direccion);
                     if($info!='error'){
-                        logs_pedidos($info , 'Solicitud de Rappi Segura', $hora, $fecha, $register_by);
+                        $titulo= 'Solicitud de Rappi Segura';
+                        logs_pedidos($info , $titulo, 'Haz solicitado una rappi segura', $hora, $fecha, $register_by);
                     }
 
                 $datos2 = array(
@@ -146,8 +147,8 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio)
             if($query2){
 
                 $mensaje = "Encontramos un conductor, confirmar precio: $".number_format($precio);
-
-                logs_pedidos($id , $mensaje, $hora, $fecha, $created_by); // Registramos los logs del pedido
+                $titulo = "Conductor disponible";
+                logs_pedidos($id ,$titulo, $mensaje, $hora, $fecha, $created_by); // Registramos los logs del pedido
                 update_estad_pd($id, $estado); // Cambiamos estado del pedido
                 update_estad_cond($conductor, $estado); // Cambiamos estado del conductor
 
@@ -169,6 +170,30 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio)
 
 function getlogs_pedidos($id){
     
+      @include('../config.php');
+
+      $sql = "select time, title, description  from logs_pedidos where id_pedido='".$id."' order by time ";
+      $query = pg_query($conexion, $sql);
+      $rows = pg_num_rows($query);
+        if($rows){
+
+            $rawdata = array(); //creamos un array
+                $i=0;
+                while ($datos = pg_fetch_array($query)){
+                    $rawdata[$i] = $datos;
+                    $i++;         
+                }
+                header('Content-Type: application/json');
+                return json_encode($rawdata);  
+
+        }else{
+            $datos2 = array(
+                'estado' => 'error',                   
+            );               
+            header('Content-Type: application/json');
+            return json_encode($datos2, JSON_FORCE_OBJECT);
+        }
+
 }
 
 
