@@ -32,4 +32,26 @@ if(isset($_POST['pedido'])){ //
     
 }
 
+
+if(isset($_GET['pedido_user'])){ //  Desde el móvil
+    //echo "Entró aquí";
+ 
+     if(isset($_GET['save'])){ 
+ 
+         echo save($_GET['id_user'], $_GET['direccion'], $_GET['indicacion'], 
+         $_GET['longitude'], $_GET['latitude'], $_GET['estado'], $_GET['telealt'], $_GET['register_by']);
+     }
+ 
+     if(isset($_GET['update'])){ // Actualizar pedido desde del usuario
+ 
+        echo  update($_GET['id'], $_GET['id_user'], $_GET['direccion'], $_GET['indicacion'], 
+        $_GET['longitude'], $_GET['latitude'], $_GET['estado'], $_GET['telealt']);
+     }
+ 
+     if(isset($_GET['delete'])){
+         echo elim($_GET['id'], $_GET['estado']);
+     }
+     
+ }
+
 ?>
