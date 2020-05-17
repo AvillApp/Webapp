@@ -131,7 +131,7 @@ function update_estad_cond($id, $estado){
 function infoConductor($conductor){
     @include('../config.php');
     $sql = "select vehiculo.placa from vehiculo, user_vehiculo 
-    where vehiculo.id=user_vehiculo.id_vehiculo and user_vehiculo.id_conductor='".$conductor."' ";
+    where vehiculo.id=user_vehiculo.id_vehiculo and user_vehiculo.id_user='".$conductor."' ";
     $query =pg_query($conexion, $sql);
     $rows = pg_num_rows($query);
         if($rows){
