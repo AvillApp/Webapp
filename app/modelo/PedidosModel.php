@@ -128,6 +128,18 @@ function update_estad_cond($id, $estado){
         }
 }
 
+function infoConductor($conductor){
+    @include('../config.php');
+    $sql = "select vehiculo.placa from vehiculo, user_vehiculo 
+    where vehiculo.id=user_vehiculo.id_vehiculo and user_vehiculo.id_conductor='".$conductor."' ";
+    $query =pg_query($conexion, $sql);
+    $rows = pg_num_rows($query);
+        if($rows){
+
+            $datos = pg_fetch_assoc($query);
+            return $datos['placa'];
+        }
+}
 function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio){
     @include('../config.php');
     
@@ -145,8 +157,8 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio)
         $query2 = pg_query($sql2);
         //$rows = pg_affected_rows($query2);
             if($query2){
-
-                $mensaje = "Encontramos un conductor, confirmar precio: $".number_format($precio);
+                $placa = infoConductor($conductor);
+                $mensaje = "Encontramos un conductor, placa: # $placa precio: $".number_format($precio);
                 $titulo = "Conductor disponible";
                 logs_pedidos($id ,$titulo, $mensaje, $hora, $fecha, $created_by); // Registramos los logs del pedido
                 update_estad_pd($id, $estado); // Cambiamos estado del pedido
