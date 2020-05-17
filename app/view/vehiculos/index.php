@@ -1,11 +1,6 @@
 <?php
 include('../../routers/rutas.php'); // Rutas
-@include('../../config.php');
 if(isset($_SESSION['id'])){
-
-$sql2 = "select * from vehiculo";
-$query2 = pg_query($conexion, $sql2);
-$rows2 = pg_num_rows($query2);
   
 ?>
 <!DOCTYPE html>
@@ -50,31 +45,30 @@ $rows2 = pg_num_rows($query2);
          
 
            <div>
-           <center><h1>Ingrese un nuevo conductor</h1></center> <hr>
+           <center><h1>Ingrese un nuevo vehículo</h1></center> <hr>
               <form>
                 <div class="row">
                
                 <div class="col">
-                   <label><b>Nombre</b></label>
-                    <input type="text" class="form-control" id='nombre' placeholder="Introduzca Nombre">
+                   <label><b>Nombre del vehículo</b></label>
+                    <input type="text" class="form-control" id='nombre' placeholder="Introduzca Nombre del vehículo">
                   </div>
                   <div class="col">
-                  <label><b>Apellidos</b></label>
-                    <input type="text" class="form-control" id='apellidos' placeholder="Introduzca Apellidos">
+                  <label><b>Placa</b></label>
+                    <input type="text" class="form-control" id='placa' placeholder="Introduzca Placa">
                   </div>
                   <div class="col">
-                  <label><b>Teléfono</b></label>
-                    <input type="number" class="form-control" id='telefono' placeholder="Introduzca Teléfono">
+                  <label><b>Modelo<</b></label>
+                    <input type="text" class="form-control" id='modelo' placeholder="Introduzca Modelo">
                   </div>
                   <div class="col">
-                  <label><b>Vehículo</b></label>
-                   <select id='vehiculo' class='form-control'>
-                      <option value="0">SELECCIONE</option>
-                      <?php while($datos=pg_fetch_assoc($query2)){ ?>
-                         <option value="<?= $datos['id'] ?>"><?php echo $datos['nombre'] ?></option>
-                      <?php } ?>
-                   </select>
+                  <label><b>Marca</b></label>
+                    <input type="text" class="form-control" id='marca' placeholder="Introduzca Marca">
                   </div>
+                  <div class="col">
+                    <label><b>Vigencia (Poliza)</b></label>
+                    <input type="date" class="form-control" id='vigencia' placeholder="Introduzca Placa">
+                  </div>  
                   <div class="col">
                    <label><b>Acción</b></label><br>
                    <input type="button" class='btn btn-primary' id='registrar' value='Registrar'>
@@ -85,7 +79,7 @@ $rows2 = pg_num_rows($query2);
           <hr>
 
           <!-- Content Row -->
-         <?php  include('./list_conductores.php') ?>
+         <?php  include('./list_vehiculos.php') ?>
 
         </div>
         <!-- /.container-fluid -->
@@ -115,32 +109,30 @@ $rows2 = pg_num_rows($query2);
           $("#registrar").click(function(){
 
                 var nombre = $("#nombre").val();
-                var apellidos = $("#apellidos").val();
-                var telefono = $("#telefono").val();
-                var tipo = 3; // Conductor
-                var vehiculo = $("#vehiculo").val();
+                var placa = $("#placa").val();
+                var modelo = $("#modelo").val();
+                var marca = $("#marca").val();
+                var vigencia = $("#vigencia").val();
 
-              if(nombre!="" && apellidos!="" && telefono!="" && tipo !="" && vehiculo!=0){
-                var datos='conductor='+1+'&nombre='+nombre+'&apellidos='+apellidos+'&telefono='+telefono+'&tipo='+tipo+'&save='+1+'&vehiculo='+vehiculo;
+
+                var datos='vehiculo='+1+'&placa='+placa+'&modelo='+modelo+'&marca='+marca+'&vigencia='+vigencia+'&save='+1+'&nombre='+nombre;
 
                 $.ajax({
 
                   type: "POST",
                   data: datos,
                   dataType: "JSON",
-                  url: "<?php echo $controller ?>ConductorController.php",
+                  url: "<?php echo $controller ?>VehiculoController.php",
                   success: function (valor){
                       if(valor.estado=='exito'){               
-                          alert("Conductor agregado correctamente");
+                          alert("Vehiculo agregado correctamente");
                           parent.location='./';
                       }
-                      else 
-                        alert(valor.estado)
                           
+                      else
+                      alert("Ocurrió un error aquí, comunícate con el administrador");
                   }
                 })
-              }else
-                alert("(*) Complete el formulario.");
           });
       });
     </script>

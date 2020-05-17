@@ -1,7 +1,8 @@
 <?php
 @include('../../config.php');
 
-$sql2 = "select pedidos.id, pedidos.latitude, pedidos.longitude, estado.id as idestado, pedidos.fecha_update, pedidos.telealt, pedidos.id_user, pedidos.indicacion, pedidos.direccion, users.nombre, pedidos.fecha_registro, estado.descripcion as estado
+$sql2 = "select pedidos.vehiculo_usu, pedidos.emision, pedidos.id, pedidos.latitude, pedidos.longitude, estado.id as idestado, pedidos.fecha_update, pedidos.telealt, pedidos.id_user,
+ pedidos.indicacion, pedidos.direccion, users.nombre, pedidos.fecha_registro, estado.descripcion as estado, users.telefono
  from pedidos, users,estado where estado.id=pedidos.estado and users.id=pedidos.id_user and pedidos.estado!=6 order by fecha_registro";
 $query2 = pg_query($conexion, $sql2);
 $rows2 = pg_num_rows($query2);
@@ -26,17 +27,19 @@ $rows2 = pg_num_rows($query2);
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Ubicación actual</th>
+                            <th>Vehiculo</th>
+                            <th>Desde</th>
                             <th>Destino</th>
                             <th>Indicación</th>
-                            <th>Teléfono</th>
+                            <th>Tel(Principal</th>
+                            <th>Tel alternativo</th>
                             <th>Cliente</th>
                             <th>Registro</th>
                             <th>Update</th>
                             <th>Estado</th>
                             <th>Aceptar</th>
-                            <th>Conductor</th>
-                            <th>Rechazar</th>
+                            <!-- <th>Conductor</th>
+                            <th>Rechazar</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -46,13 +49,11 @@ $rows2 = pg_num_rows($query2);
                     ?>
                         <tr>
                           <td><?php echo $i; ?> </td>
-                          <td align='center'>
-                          <a  target='_blank' href='https://www.google.com/maps/@<?php echo $datos2['latitude'] ?>,<?php echo $datos2['longitude'] ?>'>
-                            <img src='https://cdn.icon-icons.com/icons2/426/PNG/512/Map_1135px_1195280_42272.png' width='24' height='24' />
-                          </a>
-                          </td>
+                          <td align='center'><?php echo $datos2['vehiculo_usu'] ?></td>
+                          <td><?php echo $datos2['emision'] ?></td>
                           <td><?php echo $datos2['direccion'] ?></td>
                           <td><?php echo $datos2['indicacion'] ?> </td>
+                          <td><?php echo $datos2['telefono'] ?></td>
                           <td><?php echo $datos2['telealt'] ?></td>
                           <td><?php echo $datos2['nombre'] ?> </td>
                           <td><?php echo $datos2['fecha_registro'] ?></td>
@@ -68,8 +69,8 @@ $rows2 = pg_num_rows($query2);
 
                           echo "<font color='$colore'>".$datos2['estado']."</font>"; ?> </td>                         
                           <td><button class='btn btn-success' id='aceptar<?php echo $i ?>'>Aceptar</button> </td>
-                          <td><button class='btn btn-primary'>Conductor</button> </td>
-                          <td><button class='btn btn-danger'>Rechazar</button></td>
+                          <!-- <td><button class='btn btn-primary'>Conductor</button> </td>
+                          <td><button class='btn btn-danger'>Rechazar</button></td> -->
                         </tr>
                         <script>
                               $("#aceptar<?php echo $i ?>").click(function(){

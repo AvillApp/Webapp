@@ -49,7 +49,7 @@ function logs_pedidos($id, $titulo, $descripcion, $hora, $fecha, $created_by){
         }
 }
 
-function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $telealt, $register_by){
+function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $telealt, $register_by, $emision, $vehiculo){
 
     @include('../config.php');
     $validate = validate($id, $direccion);
@@ -59,8 +59,8 @@ function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $tel
         $telealt=0;
         
         $insert = "insert into pedidos (id_user, direccion, indicacion, longitude, latitude, estado, 
-        telealt, register_by, fecha_registro) values('".$id."', '".strtoupper($direccion)."', '".$indicacion."', 
-        '".$longitude."', '".$latitude."', '".$estado."', '".$telealt."', '".$register_by."', '".$fecha_registro."') ";
+        telealt, register_by, fecha_registro, emision, vehiculo_usu) values('".$id."', '".strtoupper($direccion)."', '".$indicacion."', 
+        '".$longitude."', '".$latitude."', '".$estado."', '".$telealt."', '".$register_by."', '".$fecha_registro."', '".$emision."', '".$vehiculo."') ";
         $query = pg_query($conexion,$insert);
 
             if($query){

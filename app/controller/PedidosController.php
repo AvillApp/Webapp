@@ -39,7 +39,7 @@ if(isset($_GET['pedido_user'])){ //  Desde el móvil
      if(isset($_GET['save'])){ 
  
          echo save($_GET['id_user'], $_GET['direccion'], $_GET['indicacion'], 
-         $_GET['longitude'], $_GET['latitude'], $_GET['estado'], $_GET['telealt'], $_GET['register_by']);
+         $_GET['longitude'], $_GET['latitude'], $_GET['estado'], $_GET['telealt'], $_GET['register_by'], $_POST['emision'], $_POST['vehiculo_user']);
      }
  
      if(isset($_GET['update'])){ // Actualizar pedido desde del usuario

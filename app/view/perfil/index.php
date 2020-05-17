@@ -35,57 +35,10 @@ if(isset($_SESSION['id'])){
             <h1 class="h3 mb-0 text-gray-800">Solicitudes del cliente</h1>           
           </div>
           <!-- Content Row -->
-          <div class="row">
+         
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-5" id='solicitudes'>
-              <div class="card border-left-success  shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-md font-weight-bold text-success  text-uppercase mb-1">SOLICITUDES</div>
-                      <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div> -->
-                    </div>
-                    <div class="col-auto">
-                    <img src='<?php echo  $images ?>car.png' width="60"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-5" id='conductores'>
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-md font-weight-bold text-success text-uppercase mb-1">CONDUCTORES</div>
-                      <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div> -->
-                    </div>
-                    <div class="col-auto">
-                    <img src='<?php echo  $images ?>user.png' width="60"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-             <!-- Earnings (Monthly) Card Example -->
-             <div class="col-xl-4 col-md-6 mb-5" id='informes'>
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-md font-weight-bold text-success text-uppercase mb-1">INFORMES</div>
-                      <!-- <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div> -->
-                    </div>
-                    <div class="col-auto">
-                    <img src='<?php echo  $images ?>repor.png' width="60"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           <?php include('../ui/menus.php'); ?>
 
           <!-- Content Row -->
          <?php  include('../perfil/solicitudes.php') ?>
