@@ -1,0 +1,70 @@
+[09-May-2020 15:00:48 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Connection refused in /home/avillcom/public_html/app/libreria/dependencia/conectar_bd.php on line 6
+[09-May-2020 15:06:04 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Connection refused in /home/avillcom/public_html/app/libreria/dependencia/conectar_bd.php on line 6
+[09-May-2020 15:18:22 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Connection refused in /home/avillcom/public_html/app/libreria/dependencia/conectar_bd.php on line 6
+[09-May-2020 15:18:27 UTC] PHP Warning:  mysqli_connect(): (HY000/2002): Connection refused in /home/avillcom/public_html/app/libreria/dependencia/conectar_bd.php on line 6
+[09-May-2020 15:32:40 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/app/libreria/dependencia/conectar_bd.php on line 7
+[09-May-2020 15:35:34 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conectar_bd.php on line 7
+[09-May-2020 15:37:03 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conectar_bd.php on line 7
+[09-May-2020 15:56:57 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conectar_bd.php on line 7
+[09-May-2020 16:04:15 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conectar_bd.php on line 7
+[10-May-2020 05:45:55 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 05:47:02 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 05:47:12 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 05:47:18 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 05:47:29 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 05:47:41 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 05:47:47 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 05:47:53 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 05:47:57 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 14:35:20 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 14:41:15 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 14:45:15 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;ec2-50-17-90-177.compute-1.amazonaws.com&quot; (50.17.90.177) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 15:07:28 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 15:08:38 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 15:09:11 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 7
+[10-May-2020 15:18:39 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 8
+[10-May-2020 15:34:49 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 8

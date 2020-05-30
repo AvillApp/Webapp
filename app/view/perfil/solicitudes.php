@@ -3,13 +3,17 @@
 
 $sql2 = "select pedidos.vehiculo_usu, pedidos.emision, pedidos.id, pedidos.latitude, pedidos.longitude, estado.id as idestado, pedidos.fecha_update, pedidos.telealt, pedidos.id_user,
  pedidos.indicacion, pedidos.direccion, users.nombre, pedidos.fecha_registro, estado.descripcion as estado, users.telefono
- from pedidos, users,estado where estado.id=pedidos.estado and users.id=pedidos.id_user and pedidos.estado!=6 order by fecha_registro";
+ from pedidos, users,estado where estado.id=pedidos.estado and users.id=pedidos.id_user and pedidos.estado!=6 order by pedidos.id desc";
 $query2 = pg_query($conexion, $sql2);
 $rows2 = pg_num_rows($query2);
+
+$_SESSION['solic'] = $rows2;
 
 ?>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+ <!--<meta http-equiv="refresh" content="80">-->
+
 <?php
 
 
@@ -68,7 +72,13 @@ $rows2 = pg_num_rows($query2);
                           $colore = "black";
 
                           echo "<font color='$colore'>".$datos2['estado']."</font>"; ?> </td>                         
-                          <td><button class='btn btn-success' id='aceptar<?php echo $i ?>'>Aceptar</button> </td>
+                          <td><?php if($datos2['idestado']==3){ ?>
+                              
+                                 <button class='btn btn-success' id='aceptar<?php echo $i ?>'>Aceptar</button> 
+                              <?php }else{ ?>
+                               <button class='btn btn-danger' id='finalizar<?php echo $i ?>'>Finalizar</button> 
+                              <?php }?>
+                              </td>
                           <!-- <td><button class='btn btn-primary'>Conductor</button> </td>
                           <td><button class='btn btn-danger'>Rechazar</button></td> -->
                         </tr>
@@ -78,6 +88,14 @@ $rows2 = pg_num_rows($query2);
                                   $("#solicitudModal").modal();
                                   $("#contenido").empty();
                                   $("#contenido").load('aceptar.php?id_pedido=<?php echo $datos2['id'] ?>');
+                                  $("#contenido").show();
+                              });
+                              
+                               $("#finalizar<?php echo $i ?>").click(function(){
+                                 // alert("Bien<?php echo $i ?>")
+                                  $("#solicitudModal").modal();
+                                  $("#contenido").empty();
+                                  $("#contenido").load('finalizar.php?id_pedido=<?php echo $datos2['id'] ?>');
                                   $("#contenido").show();
                               });
 
@@ -120,6 +138,31 @@ $rows2 = pg_num_rows($query2);
 
 <script>
 $(document).ready(function() {
+    
+   // $('#example').DataTable.destroy();
     $('#example').DataTable();
-} );
+    
+   
+    
+        
+     
+        
+        setInterval(swapImages,5000);
+        
+            function swapImages(){
+                // 
+                $.ajax({
+                    url:'validate.php',
+                    success: function(valor){
+                       // alert(valor)
+                        if(valor==1)
+                        location.reload();
+                            
+                        
+                    }
+                })
+            }
+      
+
+});
 </script>

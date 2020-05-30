@@ -1,0 +1,20 @@
+[09-May-2020 15:32:50 UTC] PHP Warning:  include(http://avill.com.co/app/app/template/header_login.php): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /home/avillcom/public_html/app/view/login/index.php on line 7
+[09-May-2020 15:32:50 UTC] PHP Warning:  include(): Failed opening 'http://avill.com.co/app/app/template/header_login.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/avillcom/public_html/app/view/login/index.php on line 7
+[09-May-2020 15:32:50 UTC] PHP Warning:  include(http://avill.com.co/app/app/template/script_login.php): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /home/avillcom/public_html/app/view/login/index.php on line 55
+[09-May-2020 15:32:50 UTC] PHP Warning:  include(): Failed opening 'http://avill.com.co/app/app/template/script_login.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/avillcom/public_html/app/view/login/index.php on line 55
+[09-May-2020 16:13:17 UTC] PHP Warning:  include(https:avill.com.co/intanet/app/template/header_login.php): failed to open stream: No such file or directory in /home/avillcom/public_html/intranet/app/view/login/index.php on line 7
+[09-May-2020 16:13:17 UTC] PHP Warning:  include(): Failed opening 'https:avill.com.co/intanet/app/template/header_login.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/avillcom/public_html/intranet/app/view/login/index.php on line 7
+[09-May-2020 16:13:17 UTC] PHP Warning:  include(https:avill.com.co/intanet/app/template/script_login.php): failed to open stream: No such file or directory in /home/avillcom/public_html/intranet/app/view/login/index.php on line 55
+[09-May-2020 16:13:17 UTC] PHP Warning:  include(): Failed opening 'https:avill.com.co/intanet/app/template/script_login.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/avillcom/public_html/intranet/app/view/login/index.php on line 55
+[09-May-2020 16:13:24 UTC] PHP Warning:  include(https:avill.com.co/intanet/app/template/header_login.php): failed to open stream: No such file or directory in /home/avillcom/public_html/intranet/app/view/login/index.php on line 7
+[09-May-2020 16:13:24 UTC] PHP Warning:  include(): Failed opening 'https:avill.com.co/intanet/app/template/header_login.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/avillcom/public_html/intranet/app/view/login/index.php on line 7
+[09-May-2020 16:13:24 UTC] PHP Warning:  include(https:avill.com.co/intanet/app/template/script_login.php): failed to open stream: No such file or directory in /home/avillcom/public_html/intranet/app/view/login/index.php on line 55
+[09-May-2020 16:13:24 UTC] PHP Warning:  include(): Failed opening 'https:avill.com.co/intanet/app/template/script_login.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/avillcom/public_html/intranet/app/view/login/index.php on line 55
+[09-May-2020 16:15:18 UTC] PHP Warning:  include(https://avill.com.co/intanet/app/template/header_login.php): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /home/avillcom/public_html/intranet/app/view/login/index.php on line 7
+[09-May-2020 16:15:18 UTC] PHP Warning:  include(): Failed opening 'https://avill.com.co/intanet/app/template/header_login.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/avillcom/public_html/intranet/app/view/login/index.php on line 7
+[09-May-2020 16:15:18 UTC] PHP Warning:  include(https://avill.com.co/intanet/app/template/script_login.php): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /home/avillcom/public_html/intranet/app/view/login/index.php on line 55
+[09-May-2020 16:15:18 UTC] PHP Warning:  include(): Failed opening 'https://avill.com.co/intanet/app/template/script_login.php' for inclusion (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/avillcom/public_html/intranet/app/view/login/index.php on line 55

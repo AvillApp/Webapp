@@ -1,0 +1,18 @@
+[10-May-2020 17:09:04 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 8
+[10-May-2020 17:09:08 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 8
+[10-May-2020 17:14:53 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 8
+[10-May-2020 17:14:59 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 8
+[10-May-2020 17:15:06 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 8
+[10-May-2020 17:20:15 UTC] PHP Warning:  pg_connect(): Unable to connect to PostgreSQL server: could not connect to server: Connection refused
+	Is the server running on host &quot;avilldb.ceenrslgtl8b.us-east-2.rds.amazonaws.com&quot; (3.132.102.70) and accepting
+	TCP/IP connections on port 5432? in /home/avillcom/public_html/intranet/app/libreria/dependencia/conexion.php on line 8

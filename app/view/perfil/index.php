@@ -41,7 +41,8 @@ if(isset($_SESSION['id'])){
            <?php include('../ui/menus.php'); ?>
 
           <!-- Content Row -->
-         <?php  include('../perfil/solicitudes.php') ?>
+           <?php include('solicitudes.php'); ?>
+       
 
         </div>
         <!-- /.container-fluid -->
@@ -67,6 +68,8 @@ if(isset($_SESSION['id'])){
  
 
 </body>
+
+
 
 </html>
 <?php 

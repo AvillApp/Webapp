@@ -1,0 +1,8 @@
+[17-May-2020 16:53:43 America/Bogota] PHP Warning:  pg_query(): Query failed: ERROR:  invalid input syntax for type integer: &quot;&quot;
+LINE 1: select id_conductor from pedidos_condu where id_pedido='' 
+                                                               ^ in /home/avillcom/public_html/intranet/app/view/perfil/finalizar.php on line 19
+[17-May-2020 16:53:43 America/Bogota] PHP Warning:  pg_num_rows() expects parameter 1 to be resource, boolean given in /home/avillcom/public_html/intranet/app/view/perfil/finalizar.php on line 20
+[17-May-2020 16:54:01 America/Bogota] PHP Warning:  pg_query(): Query failed: ERROR:  invalid input syntax for type integer: &quot;&quot;
+LINE 1: select id_conductor from pedidos_condu where id_pedido='' 
+                                                               ^ in /home/avillcom/public_html/intranet/app/view/perfil/finalizar.php on line 19
+[17-May-2020 16:54:01 America/Bogota] PHP Warning:  pg_num_rows() expects parameter 1 to be resource, boolean given in /home/avillcom/public_html/intranet/app/view/perfil/finalizar.php on line 20

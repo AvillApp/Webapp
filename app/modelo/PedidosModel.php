@@ -17,7 +17,8 @@ function validate($id, $direccion){  // Validar pedido del usuario
 function idPedido ($id, $direccion){ // Id PEDIDO
     @include('../config.php');
 
-    $sql = "select id from pedidos where id_user='".$id."' and direccion='".trim(strtoupper($direccion))."' and estado = 3";
+    $sql = "select max(id) as id from pedidos where id_user='".$id."' and estado = 3";
+    //$sql = "select max(id) as id from pedidos where id_user='".$id."' and direccion='".trim(strtoupper($direccion))."' and estado = 3";
     $query = pg_query($conexion, $sql);
     $rows = pg_num_rows($query);
        if($rows){
