@@ -110,8 +110,10 @@
 
     Notification.requestPermission();
 
-    if (Notification.permission == "granted")
+    if (Notification.permission == "granted"){
       alert("Las notificaciones ya se encuentran activas");
+      mostrarNotificacion();
+    }
     else
       alert("No haz activado las notificaciones aún");
  })
@@ -124,8 +126,6 @@
 function mostrarNotificacion() {  
     if(Notification) {
         if (Notification.permission == "granted") {
-
-
           
             var n = new Notification(titulo, opciones);
         }
@@ -140,8 +140,6 @@ function mostrarNotificacion() {
     }
 };
 
-btnPermiso.addEventListener("click", permiso);  
-btnNotificacion.addEventListener("click", mostrarNotificacion);
 //})
 </script>
 

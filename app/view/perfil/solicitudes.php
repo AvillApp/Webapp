@@ -154,15 +154,49 @@ $(document).ready(function() {
                 $.ajax({
                     url:'validate.php',
                     success: function(valor){
-                       // alert(valor)
-                        if(valor==1)
-                        location.reload();
+                        //alert(valor)
+                        if(valor==1){
+
+                          Notification.requestPermission();
+
+                            if (Notification.permission == "granted"){
+                             // alert("Las notificaciones ya se encuentran activas");
+                              mostrarNotificacion();
+                              location.reload();
+                            }
+                            
+                          
+                        }
                             
                         
                     }
                 })
             }
       
+  
+    var btnPermiso = document.getElementById("buttonP")
+    titulo = "Solicitudes",
+    opciones = {
+        icon: "logo.png",
+        body: "Tienes nuevas solicitudes"
+    };
+
+            function mostrarNotificacion() {  
+                if(Notification) {
+                    if (Notification.permission == "granted") {
+                      
+                        var n = new Notification(titulo, opciones);
+                    }
+
+                    else if(Notification.permission == "default") {
+                        alert("Primero da los permisos de notificación");
+                    }
+
+                    else {
+                        alert("Bloqueaste los permisos de notificación");
+                    }
+                }
+            };
 
 });
 </script>
