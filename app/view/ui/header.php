@@ -35,6 +35,11 @@
         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
         Editar cuenta
       </a>
+
+      <a class="dropdown-item" href="#" id='notificacion'>
+        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+        Activar notificación
+      </a>
       <!-- <a class="dropdown-item" href="#">
         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
         Settings
@@ -93,5 +98,50 @@
           }
         })
   })
+
+  var btnNotificacion = document.getElementById("buttonN"),  
+    btnPermiso = document.getElementById("buttonP")
+    titulo = "Fili Santillán",
+    opciones = {
+        icon: "logo.png",
+        body: "Notificación de prueba"
+    };
+ $("#notificacion").click(function(){
+
+    Notification.requestPermission();
+
+    if (Notification.permission == "granted")
+      alert("Las notificaciones ya se encuentran activas");
+    else
+      alert("No haz activado las notificaciones aún");
+ })
+
+
+// function permiso() {  
+       
+// };
+
+function mostrarNotificacion() {  
+    if(Notification) {
+        if (Notification.permission == "granted") {
+
+
+          
+            var n = new Notification(titulo, opciones);
+        }
+
+        else if(Notification.permission == "default") {
+            alert("Primero da los permisos de notificación");
+        }
+
+        else {
+            alert("Bloqueaste los permisos de notificación");
+        }
+    }
+};
+
+btnPermiso.addEventListener("click", permiso);  
+btnNotificacion.addEventListener("click", mostrarNotificacion);
 //})
 </script>
+

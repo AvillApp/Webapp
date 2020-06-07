@@ -35,8 +35,7 @@ if(isset($_SESSION['id'])){
             <h1 class="h3 mb-0 text-gray-800">Solicitudes del cliente</h1>           
           </div>
           <!-- Content Row -->
-         
-
+        
             <!-- Earnings (Monthly) Card Example -->
            <?php include('../ui/menus.php'); ?>
 
