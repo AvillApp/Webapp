@@ -112,7 +112,7 @@
 
     if (Notification.permission == "granted"){
       alert("Las notificaciones ya se encuentran activas");
-      mostrarNotificacion();
+      //mostrarNotificacion();
     }
     else
       alert("No haz activado las notificaciones aún");
