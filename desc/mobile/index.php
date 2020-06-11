@@ -1,4 +1,4 @@
 Versión 1.0;
 <script>
-parent.location='https://expo.io/artifacts/7019fd8f-6505-4b54-b71f-b8748b3e8a28';
+parent.location='https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40jeisson/avillApp-99f4c288cfbf4f268c0e5b4762af1a27-signed.apk';
 </script>
