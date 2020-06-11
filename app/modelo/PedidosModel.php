@@ -167,7 +167,9 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio)
 
 
                 $datos2 = array(
-                    'estado' => 'exito',                   
+                    'estado' => 'exito',  
+                    'placa' => $placa,
+                                    
                 );               
                 header('Content-Type: application/json');
                 return json_encode($datos2, JSON_FORCE_OBJECT);
@@ -207,6 +209,33 @@ function getlogs_pedidos($id){
             return json_encode($datos2, JSON_FORCE_OBJECT);
         }
 
+}
+
+function info_estado($id){
+    @include('../config.php');
+
+    $sql = "select estado from pedidos where id='".$id."' ";
+    $query = pg_query($conexion, $sql);
+    $rows = pg_num_rows($query);
+    
+        if($rows){
+            $datos = pg_fetch_assoc($query);
+           
+            $datos2 = array(
+                'estado' => 'exito',
+                'pedido' => $datos['estado'],            
+            );               
+            header('Content-Type: application/json');
+            return json_encode($datos2, JSON_FORCE_OBJECT);
+
+        }else{           
+            $datos2 = array(
+                'estado' => 'error',                   
+            );               
+            header('Content-Type: application/json');
+            return json_encode($datos2, JSON_FORCE_OBJECT);
+   
+        }
 }
 
 

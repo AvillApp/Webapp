@@ -27,8 +27,10 @@ if(isset($_POST['pedido'])){ //
     } 
 
     if(isset($_POST['delete'])){
-        echo elim($_POST['id'], $_POST['estado']);
+        echo update_estad_pd($_POST['id'], $_POST['estado']);
     }
+
+    
     
 }
 
@@ -36,27 +38,37 @@ if(isset($_POST['pedido'])){ //
 if(isset($_GET['pedido_user'])){ //  Desde el móvil
     //echo "Entró aquí";
  
-     if(isset($_GET['save'])){ 
+    if(isset($_GET['save'])){ 
  
          echo save($_GET['id_user'], $_GET['direccion'], $_GET['indicacion'], 
          $_GET['longitude'], $_GET['latitude'], $_GET['estado'], $_GET['telealt'], $_GET['register_by'], $_GET['emision'], $_GET['vehiculo_user']);
      }
  
-     if(isset($_GET['update'])){ // Actualizar pedido desde del usuario
+    if(isset($_GET['update'])){ // Actualizar pedido desde del usuario
  
-        echo  update($_GET['id'], $_GET['id_user'], $_GET['direccion'], $_GET['indicacion'], 
+        echo update($_GET['id'], $_GET['id_user'], $_GET['direccion'], $_GET['indicacion'], 
         $_GET['longitude'], $_GET['latitude'], $_GET['estado'], $_GET['telealt']);
      }
  
-     if(isset($_GET['delete'])){
+    if(isset($_GET['delete'])){
          echo elim($_GET['id'], $_GET['estado']);
      }
-     if(isset($_GET['getLog'])){
+     
+    if(isset($_GET['getLog'])){
         echo getlogs_pedidos($_GET['id']);
      }
-     if(isset($_GET['IdPedido'])){
+
+    if(isset($_GET['IdPedido'])){
         echo idPedido ($_GET['id'], $_GET['direccion']);
-     }
+    }
+
+    if(isset($_GET['confirmar'])){
+        echo update_estad_pd($_GET['id'], $_GET['estado']);
+    }
+
+    if(isset($_GET['info_estado'])){
+        echo info_estado($_GET['id']);
+    }
      
  }
 
