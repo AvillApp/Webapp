@@ -51,7 +51,7 @@ if(isset($_GET['pedido_user'])){ //  Desde el móvil
      }
  
     if(isset($_GET['delete'])){
-         echo elim($_GET['id'], $_GET['estado']);
+         echo update_estad_pd($_GET['id'], $_GET['estado']);
      }
      
     if(isset($_GET['getLog'])){
