@@ -218,7 +218,6 @@ function getlogs_pedidos($id){
             header('Content-Type: application/json');
             return json_encode($datos2, JSON_FORCE_OBJECT);
         }
-
 }
 
 function info_estado($id){
@@ -284,5 +283,34 @@ function cancelar_pedido($id, $estado, $id_user){
     }else{
         return "error";
     }
+}
+
+
+function getViajes($id){    
+    @include('../config.php');
+
+    $sql = "select pedidos.id, pedidos.direccion, estado.descripcion as estado 
+    from pedidos, estado
+    where pedidos.estado=estado.id and pedidos.id_user='".$id."' ";
+    $query = pg_query($conexion, $sql);
+    $rows = pg_num_rows($query);
+
+      if($rows){
+          $rawdata = array(); //creamos un array
+              $i=0;
+              while ($datos = pg_fetch_array($query)){
+                  $rawdata[$i] = $datos;
+                  $i++;         
+              }
+              header('Content-Type: application/json');
+              return json_encode($rawdata);  
+
+      }else{
+          $datos2 = array(
+              'estado' => 'error',                   
+          );               
+          header('Content-Type: application/json');
+          return json_encode($datos2, JSON_FORCE_OBJECT);
+      }
 }
 ?>
