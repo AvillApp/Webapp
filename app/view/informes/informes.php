@@ -3,7 +3,7 @@
 
 $sql2 = "select pedidos.token, pedidos.vehiculo_usu, pedidos.emision, pedidos.id, pedidos.latitude, pedidos.longitude, estado.id as idestado, pedidos.fecha_update, pedidos.telealt, pedidos.id_user,
  pedidos.indicacion, pedidos.direccion, users.nombre, pedidos.fecha_registro, estado.descripcion as estado, users.telefono
- from pedidos, users,estado where estado.id=pedidos.estado and users.id=pedidos.id_user and (pedidos.estado!=6 and pedidos.estado!=4) order by pedidos.id desc";
+ from pedidos, users, estado where estado.id=pedidos.estado and users.id=pedidos.id_user and (pedidos.estado=6 or pedidos.estado=4) order by pedidos.id desc";
 $query2 = pg_query($conexion, $sql2);
 $rows2 = pg_num_rows($query2);
 
@@ -39,17 +39,30 @@ $_SESSION['solic'] = $rows2;
                             <th>Tel alternativo</th>
                             <th>Cliente</th>
                             <th>Registro</th>
-                            <th>Update</th>
+                            <th>Finalización</th>
                             <th>Estado</th>
-                            <th>Aceptar</th>
-                            <!-- <th>Conductor</th>
-                            <th>Rechazar</th> -->
+                            <th>Conductor</th>
+                            <!-- <th>Rechazar</th> -->
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
                     $i=1;
                     while($datos2=pg_fetch_assoc($query2)){
+
+                        $q2 = "select users.nombre, users.apellidos 
+                        from users, pedidos_condu
+                        where users.id=pedidos_condu.id_conductor and 
+                        pedidos_condu.id_pedido='".$datos2['id']."' ";
+                        $r2 = pg_query($conexion, $q2);
+                        $r = pg_num_rows($r2);
+                            if($r){
+                                $d2 = pg_fetch_assoc($r2);
+                                $conductor = strtoupper($d2['nombre']." ".$d2['apellidos']);
+                               
+                            }                                
+                            else
+                                $conductor = "";
                     ?>
                         <tr>
                           <td><?php echo $i; ?> </td>
@@ -63,58 +76,18 @@ $_SESSION['solic'] = $rows2;
                           <td><?php echo $datos2['fecha_registro'] ?></td>
                           <td><?php echo $datos2['fecha_update'] ?></td>
                           <td><?php
-
                           if($datos2['idestado'] == 5) // En camino
                           $colore = "green";
                           else if($datos2['idestado'] == 3) // En espera
                           $colore = "red";
                           else
                           $colore = "black";
-
                           echo "<font color='$colore'>".$datos2['estado']."</font>"; ?> </td>                         
-                          <td><?php if($datos2['idestado']==3){ ?>
-                              
-                                 <button class='btn btn-success' id='aceptar<?php echo $i ?>'>Aceptar</button> 
-                              <?php }else{ ?>
-                               <button class='btn btn-danger' id='finalizar<?php echo $i ?>'>Finalizar</button> 
-                              <?php }?>
+                          <td><?php echo $conductor; ?>
                               </td>
                           <!-- <td><button class='btn btn-primary'>Conductor</button> </td>
                           <td><button class='btn btn-danger'>Rechazar</button></td> -->
-                        </tr>
-                        <script>
-                              $("#aceptar<?php echo $i ?>").click(function(){
-                                 // alert("Bien<?php echo $i ?>")
-                                  $("#solicitudModal").modal();
-                                  $("#contenido").empty();
-                                  $("#contenido").load('aceptar.php?id_pedido=<?php echo $datos2['id'] ?>&token=<?php echo base64_encode($datos2['token']) ?>');
-                                  $("#contenido").show();
-                              });
-                              
-                               $("#finalizar<?php echo $i ?>").click(function(){
-                                 // alert("Bien<?php echo $i ?>")
-                                  $("#solicitudModal").modal();
-                                  $("#contenido").empty();
-                                  $("#contenido").load('finalizar.php?id_pedido=<?php echo $datos2['id'] ?>&token=<?php echo base64_encode($datos2['token']) ?>');
-                                  $("#contenido").show();
-                              });
-
-                              $("#conductor<?php echo $i ?>").click(function(){
-                                //  alert("Bien<?php echo $i ?>")
-                                  $("#solicitudModal").modal();
-                                  $("#contenido").empty();
-                                  $("#contenido").load('select_conductor.php');
-                                  $("#contenido").show();
-                              });
-
-                              $("#rechazar<?php echo $i ?>").click(function(){
-                                  //alert("Bien<?php echo $i ?>")
-                                  $("#solicitudModal").modal();
-                                  $("#contenido").empty();
-                                  $("#contenido").load('rechazar.php');
-                                  $("#contenido").show();
-                              });
-                            </script>
+                        </tr>                        
                         <?php
                         $i++;
                       } 
@@ -140,38 +113,8 @@ $_SESSION['solic'] = $rows2;
 $(document).ready(function() {
     
    // $('#example').DataTable.destroy();
-    $('#example').DataTable();
-    
+    $('#example').DataTable();   
    
-    
-        
-     
-        
-        setInterval(swapImages,5000);
-        
-            function swapImages(){
-                // 
-                $.ajax({
-                    url:'validate.php',
-                    success: function(valor){
-                        //alert(valor)
-                        if(valor==1){
-
-                          Notification.requestPermission();
-
-                            if (Notification.permission == "granted"){
-                             // alert("Las notificaciones ya se encuentran activas");
-                              mostrarNotificacion();
-                              location.reload();
-                            }
-                            
-                          
-                        }
-                            
-                        
-                    }
-                })
-            }
       
   
     var btnPermiso = document.getElementById("buttonP")
