@@ -98,14 +98,6 @@
           }
         })
   })
-
-  var btnNotificacion = document.getElementById("buttonN"),  
-    btnPermiso = document.getElementById("buttonP")
-    titulo = "Fili Santillán",
-    opciones = {
-        icon: "logo.png",
-        body: "Notificación de prueba"
-    };
  $("#notificacion").click(function(){
 
     Notification.requestPermission();
@@ -118,27 +110,6 @@
       alert("No haz activado las notificaciones aún");
  })
 
-
-// function permiso() {  
-       
-// };
-
-function mostrarNotificacion() {  
-    if(Notification) {
-        if (Notification.permission == "granted") {
-          
-            var n = new Notification(titulo, opciones);
-        }
-
-        else if(Notification.permission == "default") {
-            alert("Primero da los permisos de notificación");
-        }
-
-        else {
-            alert("Bloqueaste los permisos de notificación");
-        }
-    }
-};
 
 //})
 </script>

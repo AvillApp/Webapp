@@ -1,6 +1,7 @@
 <?php 
 include('../../routers/rutas.php'); // Rutas
 @include('../../config.php');
+include('../../../vendor/push.php');
 
 // consultamos para mostrar solo los conductores disponibles
  $sql ="update pedidos set estado=6 where id='".$_GET['id_pedido']."' ";
@@ -26,7 +27,12 @@ $descripcion="Gracias por preferirnos";
     
     $sql5 ="update users set estado=1 where id='".$datos4['id_conductor']."' ";
     $query5 = pg_query($conexion, $sql5);
-   
+
+    // Enviamos notificación al usuario.
+    $title="Viaje finalizado";
+    $msg = "Gracias por utilizar el servicio";              
+    $userId = "1"; // Prueba;
+    enviar_push(base64_decode($_GET['token']), $msg, $title, $userId);
  }
  
 

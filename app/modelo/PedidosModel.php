@@ -1,5 +1,5 @@
 <?php
-
+include('../../vendor/push.php'); // Enviar notificaciones push
 
 function validate($id, $direccion){  // Validar pedido del usuario
     @include('../config.php');
@@ -50,7 +50,7 @@ function logs_pedidos($id, $titulo, $descripcion, $hora, $fecha, $created_by){
         }
 }
 
-function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $telealt, $register_by, $emision, $vehiculo){
+function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $telealt, $register_by, $emision, $vehiculo, $token){
 
     @include('../config.php');
     $validate = validate($id, $direccion);
@@ -60,8 +60,8 @@ function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $tel
         $telealt=0;
         
         $insert = "insert into pedidos (id_user, direccion, indicacion, longitude, latitude, estado, 
-        telealt, register_by, fecha_registro, emision, vehiculo_usu) values('".$id."', '".strtoupper($direccion)."', '".$indicacion."', 
-        '".$longitude."', '".$latitude."', '".$estado."', '".$telealt."', '".$register_by."', '".$fecha_registro."', '".$emision."', '".$vehiculo."') ";
+        telealt, register_by, fecha_registro, emision, vehiculo_usu, token) values('".$id."', '".strtoupper($direccion)."', '".$indicacion."', 
+        '".$longitude."', '".$latitude."', '".$estado."', '".$telealt."', '".$register_by."', '".$fecha_registro."', '".$emision."', '".$vehiculo."', '".$token."') ";
         $query = pg_query($conexion,$insert);
 
             if($query){
@@ -99,8 +99,7 @@ function update_estad_pd($id, $estado){
 
     $update = "update pedidos set estado='".$estado."', fecha_update='".$fecha_registro."' where id='".$id."' ";
     $query = pg_query($conexion, $update);
-    $rows = pg_num_rows($query);
-        if($rows){
+        if($query){
             return "1";
         }
         else    
@@ -141,7 +140,7 @@ function infoConductor($conductor){
             return $datos['placa'];
         }
 }
-function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio){
+function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio, $token){
     @include('../config.php');
     
     $sql = "select id from pedidos_condu where id_pedido='".$id."' ";
@@ -155,7 +154,7 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio)
             $sql2 ="insert into pedidos_condu (id_pedido, id_conductor, estado, created_by, fecha_registro)
             values('".$id."', '".$conductor."','".$estado."', '".$created_by."', '".$fecha_registro."') ";
         }
-        $query2 = pg_query($sql2);
+        $query2 = pg_query($conexion, $sql2);
         //$rows = pg_affected_rows($query2);
             if($query2){
                 $placa = infoConductor($conductor);
@@ -164,11 +163,23 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio)
                 logs_pedidos($id ,$titulo, $mensaje, $hora, $fecha, $created_by); // Registramos los logs del pedido
                 update_estad_pd($id, $estado); // Cambiamos estado del pedido
                 update_estad_cond($conductor, $estado); // Cambiamos estado del conductor
+                
+                // Enviamos notificacion push, 
 
+                $title="Tu Rapi Segura";
+                $msg = "Hemos encontrado un conductor, confirma el viaje";              
+                $userId = "1"; // Prueba;
+                enviar_push($token, $msg, $title, $userId);
+
+                // Actualimzamos el precio del pedido
+
+                $q = "update pedidos set precio='".$precio."' where id='".$id."' ";
+                $q1 = pg_query($conexion, $q);
 
                 $datos2 = array(
                     'estado' => 'exito',  
                     'placa' => $placa,
+                    'precio' => $precio
                                     
                 );               
                 header('Content-Type: application/json');
@@ -183,8 +194,7 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio)
 
 }
 
-function getlogs_pedidos($id){
-    
+function getlogs_pedidos($id){    
       @include('../config.php');
 
       $sql = "select time, title, description  from logs_pedidos where id_pedido='".$id."' order by time ";
@@ -214,7 +224,7 @@ function getlogs_pedidos($id){
 function info_estado($id){
     @include('../config.php');
 
-    $sql = "select estado from pedidos where id='".$id."' ";
+    $sql = "select estado, precio from pedidos where id='".$id."' ";
     $query = pg_query($conexion, $sql);
     $rows = pg_num_rows($query);
     
@@ -223,20 +233,56 @@ function info_estado($id){
            
             $datos2 = array(
                 'estado' => 'exito',
-                'pedido' => $datos['estado'],            
+                'pedido' => $datos['estado'],  
+                'precio' => $datos['precio']          
             );               
             header('Content-Type: application/json');
             return json_encode($datos2, JSON_FORCE_OBJECT);
-
+            
         }else{           
             $datos2 = array(
                 'estado' => 'error',                   
             );               
             header('Content-Type: application/json');
             return json_encode($datos2, JSON_FORCE_OBJECT);
-   
         }
 }
 
 
+
+function confirmar_pedido($id, $estado, $id_user){
+    @include('../config.php');
+    //echo $user;
+    $confirmar = update_estad_pd($id, $estado);
+
+    if($confirmar==1){
+        // Registramos el log del pedido.
+
+        $mensaje = "Haz confirmado la rappi segura";
+        $titulo = "Viaje confirmado";
+        logs_pedidos($id ,$titulo, $mensaje, $hora, $fecha, $id_user); // Registramos los logs del pedido
+        return "1";
+
+    }else{
+        return "error";
+    }
+}
+
+function cancelar_pedido($id, $estado, $id_user){
+    @include('../config.php');
+   // echo $user;
+    $confirmar = update_estad_pd($id, $estado);
+
+    if($confirmar==1){
+        // Registramos el log del pedido.
+
+        $mensaje = "Haz cancelado tu rappi segura";
+        $titulo = "Viaje cancelado";
+        logs_pedidos($id ,$titulo, $mensaje, $hora, $fecha, $id_user); // Registramos los logs del pedido
+        return "1";
+
+    }else{
+        return "error";
+    }
+}
 ?>
