@@ -17,11 +17,11 @@ require_once 'autoload.php';
 // $expo->notify([$channelName], $notification);
 
 
-/*$token = "ExponentPushToken[bQ7mvkGAdDxmAbMfNfXPiq]";
+$token = "ExponentPushToken[bQ7mvkGAdDxmAbMfNfXPiq]";
 $msg = "Estamos en camino";
 $title= "Tu Rappi Segura";
 $userId = 'userId from your database';
-enviar_push($token, $msg, $title, $userId);*/
+enviar_push($token, $msg, $title, $userId);
 
   function enviar_push($token, $msg, $title, $userId){
 
