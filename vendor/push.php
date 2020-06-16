@@ -17,7 +17,7 @@ require_once 'autoload.php';
 // $expo->notify([$channelName], $notification);
 
 
-$token = "ExponentPushToken[bQ7mvkGAdDxmAbMfNfXPiq]";
+$token = "ExponentPushToken[S_IbP9PeJLFxe8bfMUijva]";
 $msg = "Estamos en camino";
 $title= "Tu Rappi Segura";
 $userId = 'userId from your database';
