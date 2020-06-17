@@ -3,7 +3,7 @@
 
 $sql2 = "select pedidos.token, pedidos.vehiculo_usu, pedidos.emision, pedidos.id, pedidos.latitude, pedidos.longitude, estado.id as idestado, pedidos.fecha_update, pedidos.telealt, pedidos.id_user,
  pedidos.indicacion, pedidos.direccion, users.nombre, pedidos.fecha_registro, estado.descripcion as estado, users.telefono
- from pedidos, users,estado where estado.id=pedidos.estado and users.id=pedidos.id_user and (pedidos.estado!=6 and pedidos.estado!=4) order by pedidos.id desc";
+ from pedidos, users,estado where estado.id=pedidos.estado and users.id=pedidos.id_user and (pedidos.estado!=6) order by pedidos.id desc";
 $query2 = pg_query($conexion, $sql2);
 $rows2 = pg_num_rows($query2);
 
