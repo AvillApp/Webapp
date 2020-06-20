@@ -144,7 +144,7 @@ function infoConductor($conductor){
 
 function envio_sms($tel, $mensaje, $refer){
         
-    // echo "entro aacá en mensajes";
+    //echo "entro aacá en mensajes";
         // echo $tel;
              $timepoinicio = microtime(true);
 
@@ -229,14 +229,10 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio,
 
               //  enviar_push($token, $msg, $title, $userId);
 
-                 
-
                 // Actualimzamos el precio del pedido
 
-                $q = "update pedidos set precio='".$precio."' where id='".$id."' ";
+                $q = "update pedidos set precio='".$precio."', tiempo='".$tiempo."' where id='".$id."' ";
                 $q1 = pg_query($conexion, $q);
-
-                envio_sms($tel_usu, $msg, $title);
 
                 $datos2 = array(
                     'estado' => 'exito',  

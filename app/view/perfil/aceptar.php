@@ -37,12 +37,7 @@ include('../../routers/rutas.php'); // Rutas
                     <label for="email">Tiempo estimado (Minutos):</label>
 
                     <input type="number" class='form-control' id='tiempo' placeholder='Tiempo estimado (expresar en minutos)'/>
-                    <!-- <select class='form-control' id='tiempo'>
-                    <option value="0">SELECCIONE TIEMPO</option>
-                        <?php for($i=1;$i<=1000;$i++){ ?>
-                            <option value="<?= $datos['id'] ?>"><?php echo strtoupper($datos['nombre']." ".$datos['apellidos']) ?></option>
-                        <?php  } ?>
-                    </select> -->
+                   
                 </div>                
                
             </form>
@@ -71,6 +66,8 @@ $("#confirmar").click(function(){
     var created_by = <?php echo $_SESSION['id_user'] ?>;
     var token ="<?php echo $_GET['token'] ?>";
     var telefono  ="<?php echo $_GET['tel_usu'] ?>";
+    var mensaje = "Hemos encontrado un conductor, confirma tu viaje";
+    var refer = 1;
     
     if(conductor!="" && precio!="" && id_pedido!=""){
         var datos='pedido=1&select_conduc=1&conductor='+conductor+'&estado='+5+'&created_by='+created_by+'&tiempo='+tiempo+'&precio='+precio+'&id='+id_pedido+'&token='+token+'&tel_usu='+telefono;
@@ -81,7 +78,18 @@ $("#confirmar").click(function(){
                 dataType: "JSON",
                 url: "<?php echo $controller ?>PedidosController.php",
                 success: function (valor){
-                    if(valor.estado=='exito'){               
+                    if(valor.estado=='exito'){   
+                       
+                        var datos2 ='pedido=1&enviosms=1&telefono='+telefono+'&mensaje='+mensaje+'&refer='+refer;
+                       $.ajax({
+                        type: "POST",
+                        data: datos2,
+                        url: "<?php echo $controller ?>PedidosController.php",
+                        success: function (valor){
+
+                        }
+                       })
+                      
                         alert("Conductor seleccionado y notificación enviada correctamente");
                         location.reload();
                     }
@@ -95,5 +103,6 @@ $("#confirmar").click(function(){
 
     
 })
+
  
 </script>
