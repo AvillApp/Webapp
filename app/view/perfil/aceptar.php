@@ -70,9 +70,10 @@ $("#confirmar").click(function(){
     var id_pedido = <?php echo $_GET['id_pedido'] ?>;
     var created_by = <?php echo $_SESSION['id_user'] ?>;
     var token ="<?php echo $_GET['token'] ?>";
+    var telefono  ="<?php echo $_GET['tel_usu'] ?>";
     
     if(conductor!="" && precio!="" && id_pedido!=""){
-        var datos='pedido=1&select_conduc=1&conductor='+conductor+'&estado='+5+'&created_by='+created_by+'&tiempo='+tiempo+'&precio='+precio+'&id='+id_pedido+'&token='+token;
+        var datos='pedido=1&select_conduc=1&conductor='+conductor+'&estado='+5+'&created_by='+created_by+'&tiempo='+tiempo+'&precio='+precio+'&id='+id_pedido+'&token='+token+'&tel_usu='+tel_usu;
 
             $.ajax({
                 type: "POST",

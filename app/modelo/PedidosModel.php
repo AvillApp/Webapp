@@ -194,7 +194,7 @@ function envio_sms($tel, $mensaje, $refer){
 
      
  }
-function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio, $token){
+function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio, $token, $tel_usu){
     @include('../config.php');
     
     $sql = "select id from pedidos_condu where id_pedido='".$id."' ";
@@ -229,7 +229,7 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio,
 
               //  enviar_push($token, $msg, $title, $userId);
 
-                 envio_sms($placa[1], $msg, $title);
+                 envio_sms($tel_usu, $msg, $title);
 
                 // Actualimzamos el precio del pedido
 
