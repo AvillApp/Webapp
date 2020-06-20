@@ -225,7 +225,7 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio,
                 $title="Tu Rapi Segura";
                 $msg = "Hemos encontrado un conductor, confirma el viaje";              
                 $userId = "1"; // Prueba;
-                "No enviar push";
+                //"No enviar push";
 
               //  enviar_push($token, $msg, $title, $userId);
 
