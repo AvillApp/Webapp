@@ -37,7 +37,7 @@ if(isset($_GET['servicios_user'])){ //  Desde el móvil
         echo getServicios();
     }
 
-    if(isset($_GET['getViajes'])){
+    if(isset($_GET['getTipo'])){
         echo getTipo($_GET['servicio']);
     }
      
