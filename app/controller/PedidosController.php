@@ -23,13 +23,17 @@ if(isset($_POST['pedido'])){ //
     }
 
     if(isset($_POST['select_conduc'])){
-        echo  select_conduct($_POST['id'], $_POST['conductor'], $_POST['estado'], $_POST['created_by'], $_POST['tiempo'], $_POST['precio'], base64_decode($_POST['token']));
+        echo  select_conduct($_POST['id'], $_POST['conductor'], $_POST['estado'], $_POST['created_by'], $_POST['tiempo'], $_POST['precio'], base64_decode($_POST['tel_usu']));
     } 
 
     if(isset($_POST['delete'])){
         echo update_estad_pd($_POST['id'], $_POST['estado']);
     }
 
+    if(isset($_POST['enviosms'])){
+        
+        echo envio_sms(base64_decode($_POST['telefono']), ($_POST['mensaje']), ($_POST['refer']));
+    }
     
     
 }
