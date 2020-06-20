@@ -95,7 +95,7 @@ $_SESSION['solic'] = $rows2;
                                  // alert("Bien<?php echo $i ?>")
                                   $("#solicitudModal").modal();
                                   $("#contenido").empty();
-                                  $("#contenido").load('finalizar.php?id_pedido=<?php echo $datos2['id'] ?>&tel_usu=<?php echo base64_encode($datos['telefono']) ?>&token=<?php echo base64_encode($datos2['token']) ?>');
+                                  $("#contenido").load('finalizar.php?id_pedido=<?php echo $datos2['id'] ?>&tel_usu=<?php echo base64_encode($datos2['telefono']) ?>&token=<?php echo base64_encode($datos2['token']) ?>');
                                   $("#contenido").show();
                               });
 
