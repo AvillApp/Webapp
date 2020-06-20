@@ -283,7 +283,7 @@ function getlogs_pedidos($id){
 function info_estado($id){
     @include('../config.php');
 
-    $sql = "select pedidos.estado, pedidos.precio, pedidos_condu.id_conductor
+    $sql = "select pedidos.estado, pedidos.precio, pedidos_condu.id_conductor, pedidos.tiempo
      from pedidos, pedidos_condu 
      where pedidos_condu.id_pedido=pedidos.id 
      and pedidos.id='".$id."' ";
@@ -300,13 +300,14 @@ function info_estado($id){
             $placa =  $info[0];
             $telefono = $info[1];
             $conductor = $info[3];
-           
+            $tiempo = $datos['precio']." minutos";
             $datos2 = array(
                 'estado' => 'exito',
                 'pedido' => $datos['estado'],  
                 'precio' => $datos['precio'],
                 'placa' => $placa,
                 'conductor' =>$conductor,
+                'tiempo' => $tiempo,
                 'foto' => $foto          
             );               
             header('Content-Type: application/json');
