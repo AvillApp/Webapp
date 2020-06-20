@@ -32,7 +32,9 @@ $descripcion="Gracias por preferirnos";
     $title="Viaje finalizado";
     $msg = "Gracias por utilizar el servicio";              
     $userId = "1"; // Prueba;
-    enviar_push(base64_decode($_GET['token']), $msg, $title, $userId);
+   
+      //NO enviar push todavía
+   // enviar_push(base64_decode($_GET['token']), $msg, $title, $userId);
  }
  
 
@@ -41,5 +43,7 @@ $descripcion="Gracias por preferirnos";
  
     
 echo "PEDIDO FINALIZADO CORRECTAMENTE";
-
 ?>
+<script>
+location.reload();
+</script>

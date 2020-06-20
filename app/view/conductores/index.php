@@ -75,6 +75,10 @@ $rows2 = pg_num_rows($query2);
                       <?php } ?>
                    </select>
                   </div>
+                  <div>
+                  <label><b>Acción</b></label><br>
+                  <a href="subir_archivo.php" target='_blank' class="permite_acceso">Adjuntar foto</a>
+                  </div>
                   <div class="col">
                    <label><b>Acción</b></label><br>
                    <input type="button" class='btn btn-primary' id='registrar' value='Registrar'>

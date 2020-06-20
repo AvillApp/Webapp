@@ -130,16 +130,70 @@ function update_estad_cond($id, $estado){
 
 function infoConductor($conductor){
     @include('../config.php');
-    $sql = "select vehiculo.placa from vehiculo, user_vehiculo 
-    where vehiculo.id=user_vehiculo.id_vehiculo and user_vehiculo.id_user='".$conductor."' ";
+    $sql = "select vehiculo.placa, users.foto, users.telefono, users.nombre, users.apellidos from vehiculo, user_vehiculo, users
+    where users.id=user_vehiculo.id_user and vehiculo.id=user_vehiculo.id_vehiculo and user_vehiculo.id_user='".$conductor."' ";
     $query =pg_query($conexion, $sql);
     $rows = pg_num_rows($query);
         if($rows){
 
             $datos = pg_fetch_assoc($query);
-            return $datos['placa'];
+            $conductor = $datos['nombre']." ".$datos['apellidos'];
+            return $datos['placa'].",".$datos['telefono'].",".$datos['foto'].",".$conductor;
         }
 }
+
+function envio_sms($tel, $mensaje, $refer){
+        
+    // echo "entro aacá en mensajes";
+        // echo $tel;
+             $timepoinicio = microtime(true);
+
+                                                 unset($ch);
+                                                 unset($peticion_envio_mensajes_json);
+                                                 
+                                             
+                                                     $mensaje =  $mensaje;
+                                                     $cliente = '10011364';
+                                                     $apikey = 'OZW8Pp1OgaRLUrDzBxqS246kE2EopU';
+                                                     $numeros = $tel;
+                                                     $texto = $mensaje;
+                                                     $referencia = $refer;
+                                                     $fecha_programacion = '';
+
+                                                     $arrayName = array(
+                                                         'cliente' => $cliente,
+                                                         'api' => $apikey,
+                                                         'numero' => $numeros,
+                                                         'sms' => $texto,
+                                                         'fecha' => $fecha_programacion,
+                                                         'referecia' => $referencia
+                                                     );
+
+                                                     $url_pubsub_string ='https://api.hablame.co/sms/envio/';
+                                                     // abrimos la sesión cURL
+                                                     $ch = curl_init();
+                                                     // definimos la URL a la que hacemos la petición
+                                                     curl_setopt($ch, CURLOPT_URL, $url_pubsub_string);
+                                                     // indicamos el tipo de petición: POST
+                                                     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                                                     // definimos cada uno de los parámetros
+                                                     curl_setopt($ch, CURLOPT_POSTFIELDS, $arrayName);
+
+                                                     // recibimos la respuesta y la guardamos en una variable
+                                                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                                     $remote_server_output = curl_exec ($ch);
+                                                     // cerramos la sesión cURL
+                                                     curl_close ($ch);
+                                                     // hacemos lo que queramos con los datos recibidos
+                                                     // por ejemplo, los mostramos
+                                                     //  print_r($remote_server_output);
+                                                     //print($remote_server_output);
+                                                     //  var_dump($remote_server_output);
+                                                     $timpofin = microtime(true);
+                                                     //print ('el tiempo total: '.($timpofin-$timepoinicio));
+
+     
+ }
 function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio, $token){
     @include('../config.php');
     
@@ -158,7 +212,9 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio,
         //$rows = pg_affected_rows($query2);
             if($query2){
                 $placa = infoConductor($conductor);
-                $mensaje = "Encontramos un conductor, placa: # $placa precio: $".number_format($precio);
+                $placa = explode(",", $placa);
+
+                $mensaje = "Encontramos un conductor, placa: # $placa[0] precio: $".number_format($precio);
                 $titulo = "Conductor disponible";
                 logs_pedidos($id ,$titulo, $mensaje, $hora, $fecha, $created_by); // Registramos los logs del pedido
                 update_estad_pd($id, $estado); // Cambiamos estado del pedido
@@ -169,7 +225,11 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio,
                 $title="Tu Rapi Segura";
                 $msg = "Hemos encontrado un conductor, confirma el viaje";              
                 $userId = "1"; // Prueba;
-                enviar_push($token, $msg, $title, $userId);
+                "No enviar push";
+
+              //  enviar_push($token, $msg, $title, $userId);
+
+                 envio_sms($placa[1], $msg, $title);
 
                 // Actualimzamos el precio del pedido
 
@@ -223,17 +283,31 @@ function getlogs_pedidos($id){
 function info_estado($id){
     @include('../config.php');
 
-    $sql = "select estado, precio from pedidos where id='".$id."' ";
+    $sql = "select pedidos.estado, pedidos.precio, pedidos_condu.id_conductor
+     from pedidos, pedidos_condu 
+     where pedidos_condu.id_pedido=pedidos.id 
+     and pedidos.id='".$id."' ";
     $query = pg_query($conexion, $sql);
     $rows = pg_num_rows($query);
     
         if($rows){
             $datos = pg_fetch_assoc($query);
+
+           $info =  infoConductor($datos['id_conductor']);
+           $info = explode(",", $info);
+
+            $foto = 'https://intranet.avill.com.co/files/'.$info[2];
+            $placa =  $info[0];
+            $telefono = $info[1];
+            $conductor = $info[3];
            
             $datos2 = array(
                 'estado' => 'exito',
                 'pedido' => $datos['estado'],  
-                'precio' => $datos['precio']          
+                'precio' => $datos['precio'],
+                'placa' => $placa,
+                'conductor' =>$conductor,
+                'foto' => $foto          
             );               
             header('Content-Type: application/json');
             return json_encode($datos2, JSON_FORCE_OBJECT);

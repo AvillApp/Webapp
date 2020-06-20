@@ -82,6 +82,7 @@ $("#confirmar").click(function(){
                 success: function (valor){
                     if(valor.estado=='exito'){               
                         alert("Conductor seleccionado y notificación enviada correctamente");
+                        location.reload();
                     }
                         
                     else

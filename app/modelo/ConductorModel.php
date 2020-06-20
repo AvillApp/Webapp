@@ -37,11 +37,23 @@ function save_user($nombre, $apellidos, $telefono, $tipouser, $vehiculo){
     @include('../config.php');
     $validate = validate($telefono);
     if($validate == 2){
-        $insert = "insert into users (nombre, apellidos, telefono, tipouser, fecha_registro, estado)
-         values('".$nombre."', '".$apellidos."', '".$telefono."', '".$tipouser."', '".$fecha_registro."', 1) ";
+
+       // echo  "valor: ".$_SESSION['archivo'];
+
+        $sq = "select ruta from archivos order by id desc";
+        $fg = pg_query($conexion, $sq);
+        $rg = pg_num_rows($fg);
+
+            if($rg){
+                $df  = pg_fetch_assoc($fg);
+                $foto = $df['ruta'];
+            }
+       $insert = "insert into users (nombre, apellidos, telefono, tipouser, fecha_registro, estado, foto)
+         values('".$nombre."', '".$apellidos."', '".$telefono."', '".$tipouser."', '".$fecha_registro."', 1, '".$foto."') ";
         $query = pg_query($conexion, $insert);
         
             if($query){
+                @$_SESSION['archivo']="";
                
                 $id_user = infoUser($telefono);
                     if($id_user!="error")
