@@ -73,7 +73,7 @@ $("#confirmar").click(function(){
     var telefono  ="<?php echo $_GET['tel_usu'] ?>";
     
     if(conductor!="" && precio!="" && id_pedido!=""){
-        var datos='pedido=1&select_conduc=1&conductor='+conductor+'&estado='+5+'&created_by='+created_by+'&tiempo='+tiempo+'&precio='+precio+'&id='+id_pedido+'&token='+token+'&tel_usu='+tel_usu;
+        var datos='pedido=1&select_conduc=1&conductor='+conductor+'&estado='+5+'&created_by='+created_by+'&tiempo='+tiempo+'&precio='+precio+'&id='+id_pedido+'&token='+token+'&tel_usu='+telefono;
 
             $.ajax({
                 type: "POST",
