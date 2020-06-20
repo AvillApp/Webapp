@@ -84,8 +84,8 @@ $descripcion="Gracias por preferirnos";
     $title="Viaje finalizado";
     $msg = "Gracias por utilizar el servicio";              
     $userId = "1"; // Prueba;
-    
-    envio_sms($base64_decode($_GET['tel_usu']), $msg, $title);
+
+    envio_sms(base64_decode($_GET['tel_usu']), $msg, $title);
       //NO enviar push todavía
    // enviar_push(base64_decode($_GET['token']), $msg, $title, $userId);
  }
