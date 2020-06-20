@@ -194,7 +194,7 @@ function envio_sms($tel, $mensaje, $refer){
 
      
  }
-function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio, $token, $tel_usu){
+function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio, $tel_usu){
     @include('../config.php');
     
     $sql = "select id from pedidos_condu where id_pedido='".$id."' ";
