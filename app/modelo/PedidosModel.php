@@ -229,12 +229,14 @@ function select_conduct($id, $conductor, $estado, $created_by, $tiempo, $precio,
 
               //  enviar_push($token, $msg, $title, $userId);
 
-                 envio_sms($tel_usu, $msg, $title);
+                 
 
                 // Actualimzamos el precio del pedido
 
                 $q = "update pedidos set precio='".$precio."' where id='".$id."' ";
                 $q1 = pg_query($conexion, $q);
+
+                envio_sms($tel_usu, $msg, $title);
 
                 $datos2 = array(
                     'estado' => 'exito',  
@@ -300,7 +302,7 @@ function info_estado($id){
             $placa =  $info[0];
             $telefono = $info[1];
             $conductor = $info[3];
-            $tiempo = $datos['precio']." minutos";
+            $tiempo = $datos['tiempo']." minutos";
             $datos2 = array(
                 'estado' => 'exito',
                 'pedido' => $datos['estado'],  
