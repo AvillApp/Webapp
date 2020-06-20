@@ -29,3 +29,16 @@ if(isset($_POST['servicios'])){ //
 
     
 }
+
+if(isset($_GET['servicios_user'])){ //  Desde el móvil
+    //echo "Entró aquí";
+ 
+    if(isset($_GET['getServicio'])){
+        echo getServicios();
+    }
+
+    if(isset($_GET['getViajes'])){
+        echo getTipo($_GET['servicio']);
+    }
+     
+ }

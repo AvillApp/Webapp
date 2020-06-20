@@ -151,4 +151,60 @@
         }*/
 
     }
+
+
+    function getServicios(){    
+        @include('../config.php');
+    
+        $sql = "select id, nombre 
+        from servicio ";
+        $query = pg_query($conexion, $sql);
+        $rows = pg_num_rows($query);
+    
+          if($rows){
+              $rawdata = array(); //creamos un array
+                  $i=0;
+                  while ($datos = pg_fetch_array($query)){
+                      $rawdata[$i] = $datos;
+                      $i++;         
+                  }
+                  header('Content-Type: application/json');
+                  return json_encode($rawdata);  
+    
+          }else{
+              $datos2 = array(
+                  'estado' => 'error',                   
+              );               
+              header('Content-Type: application/json');
+              return json_encode($datos2, JSON_FORCE_OBJECT);
+          }
+    }
+
+    function getTipo($id){    
+        @include('../config.php');
+    
+        $sql = "select id, nombre
+        from tipo_servicio
+        where servicio='".$id."' ";
+        $query = pg_query($conexion, $sql);
+        $rows = pg_num_rows($query);
+    
+          if($rows){
+              $rawdata = array(); //creamos un array
+                  $i=0;
+                  while ($datos = pg_fetch_array($query)){
+                      $rawdata[$i] = $datos;
+                      $i++;         
+                  }
+                  header('Content-Type: application/json');
+                  return json_encode($rawdata);  
+    
+          }else{
+              $datos2 = array(
+                  'estado' => 'error',                   
+              );               
+              header('Content-Type: application/json');
+              return json_encode($datos2, JSON_FORCE_OBJECT);
+          }
+    }
 ?>
