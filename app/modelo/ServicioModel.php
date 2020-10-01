@@ -196,7 +196,7 @@
                      $rawdata[$i] = $datos;
                       $i++;         
                   }
-                  //header('Content-Type: application/json');
+                  header('Content-Type: application/json');
                   return ($rawdata);  
     
           }else{
