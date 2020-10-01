@@ -192,8 +192,7 @@
           if($rows){
               $rawdata = array(); //creamos un array
                   $i=0;
-                  while ($datos = pg_fetch_array($query)){
-                    //$new_array[] = $row; // Inside while loop
+                  while ($datos = pg_fetch_assoc($query)){
                      $rawdata[$i] = $datos;
                       $i++;         
                   }
