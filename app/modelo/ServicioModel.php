@@ -193,7 +193,7 @@
               $rawdata = array(); //creamos un array
               $i=0;
                   while ($datos = pg_fetch_array($query)){
-                     $rawdata[$i] = $datos;    
+                     $rawdata[] = $datos['nombre'];    
                       $i++;
                   }
                   header('Content-Type: application/json');
