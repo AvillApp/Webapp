@@ -202,7 +202,7 @@
           }else{
               $datos2 = array("SIN SERVICIO");
               header('Content-Type: application/json');
-              return json_encode($datos2, JSON_FORCE_OBJECT);
+              return json_encode($datos2);
           }
     }
 ?>
