@@ -200,9 +200,7 @@
                   return json_encode($rawdata);  
     
           }else{
-              $datos2 = array(
-                  'estado' => 'error',                   
-              );               
+              $datos2 = array("SIN SERVICIO");
               header('Content-Type: application/json');
               return json_encode($datos2, JSON_FORCE_OBJECT);
           }
