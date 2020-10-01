@@ -197,7 +197,7 @@
                       $i++;         
                   }
                   header('Content-Type: application/json');
-                  return ($rawdata);  
+                  return json_encode($rawdata);  
     
           }else{
               $datos2 = array(
