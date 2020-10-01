@@ -192,7 +192,7 @@
           if($rows){
               $rawdata = array(); //creamos un array
                   while ($datos = pg_fetch_array($query)){
-                     $rawdata[] = $datoss     
+                     $rawdata[] = $datos;    
                   }
                   header('Content-Type: application/json');
                   return json_encode($rawdata);  
