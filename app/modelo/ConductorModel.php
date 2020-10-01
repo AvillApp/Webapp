@@ -28,8 +28,6 @@ function infoUser($telefono){
             }else{
                return "error";
             }
-   
-
 }
 
 
@@ -97,15 +95,6 @@ function select_vehiculo($id_user, $vehiculo){
                 header('Content-Type: application/json');
                 return json_encode($datos2, JSON_FORCE_OBJECT);
             }
-    /*}else{
-        
-        $datos2 = array(
-            'estado' => 'Usuario ya existe',                   
-        );               
-        header('Content-Type: application/json');
-        return json_encode($datos2, JSON_FORCE_OBJECT);
-       
-    }*/
 }
 
 ?>
