@@ -194,7 +194,7 @@
                   while ($datos = pg_fetch_array($query)){
                      $rawdata[] = $datos;    
                   }
-                  header('Content-Type: application/json');
+                  //header('Content-Type: application/json');
                   return json_encode($rawdata);  
     
           }else{
