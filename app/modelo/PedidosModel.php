@@ -68,8 +68,8 @@ function save($id, $direccion, $indicacion, $longitude, $latitude, $estado, $tel
                 // Registamos el evento del pedido del usuario
                 $info =  idPedido ($id, $direccion);
                     if($info!='error'){
-                        $titulo= 'Solicitud de Rappi Segura';
-                        logs_pedidos($info , $titulo, 'Haz solicitado una rappi segura', $hora, $fecha, $register_by);
+                        $titulo= 'Solicitud de Vehículo Seguro';
+                        logs_pedidos($info , $titulo, 'Haz solicitado un vehículo seguro', $hora, $fecha, $register_by);
                     }
 
                 $datos2 = array(
@@ -330,7 +330,7 @@ function confirmar_pedido($id, $estado, $id_user){
     if($confirmar==1){
         // Registramos el log del pedido.
 
-        $mensaje = "Haz confirmado la rappi segura";
+        $mensaje = "Haz confirmado tu vehículo seguro";
         $titulo = "Viaje confirmado";
         logs_pedidos($id ,$titulo, $mensaje, $hora, $fecha, $id_user); // Registramos los logs del pedido
         return "1";
@@ -348,7 +348,7 @@ function cancelar_pedido($id, $estado, $id_user){
     if($confirmar==1){
         // Registramos el log del pedido.
 
-        $mensaje = "Haz cancelado tu rappi segura";
+        $mensaje = "Haz cancelado tu vehículo seguro";
         $titulo = "Viaje cancelado";
         logs_pedidos($id ,$titulo, $mensaje, $hora, $fecha, $id_user); // Registramos los logs del pedido
         return "1";
